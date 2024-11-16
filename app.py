@@ -27,7 +27,6 @@ def index():
         value = int(request.form['edit'])
         return redirect(url_for('edit', id=value))
 
-    make_db()
     employees = get_employees()
 
     page = request.args.get('page', 1, type=int)

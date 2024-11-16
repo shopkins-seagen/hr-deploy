@@ -9,3 +9,4 @@ def make_db():
     upload_employees('static/uploads/MOCK_DATA_3.csv')
 
 
+make_db()
