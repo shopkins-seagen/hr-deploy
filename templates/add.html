@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block content %}
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <div class="col-6 card h-100" style="background-color:aliceblue;border: 1px solid blue;">
+        <div class="card-body">
+            <h6 class="card-title"><i style="margin-right:5px;" class="fa fa-user-plus"></i>Add a New Employee</h6>
+            <hr/>
+            <form method="POST">
+                <div class="card-text small">
+                    <table style="width: 100%;">
+                        <tr>
+                            <th>Name</th>
+                            <td><input id="name" type="text" name="name" class="form-control"></td>
+                        </tr>
+                        <tr>
+                            <th>Title</th>
+                            <td><input id="title" type="text" name="title" class="form-control"></td>
+                        </tr>
+                        <tr>
+                            <th>Address</th>
+                            <td><input type="text" id="address" name="address" class="form-control"></td>
+                        </tr>
+                        <tr>
+                            <th>SSN</th>
+                            <td><input id="ssn" type="text" name="ssn" class="form-control"></td>
+                        </tr>
+                        <tr>
+                            <th>DOB</th>
+                            <td><input type="date" id="dob" name="dob" class="form-control"></td>
+                        </tr>
+                        <tr>
+                            <th>Started</th>
+                            <td><input type="date" id="started" name="started" class="form-control" required></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="container-fluid button-container">
+                    <div style="float:left;margin-top:3px;" class="text-center">
+                        <button type="submit"
+                                title="Save"
+                                class="btn btn-sm btn-outline-primary card_button">
+                            <i class="fa fa-save"></i></button>
+                        <button onclick="cancel()"
+                                title="Cancel"
+                                class="btn btn-sm btn-outline-warning card_button">
+                            <i class="fa fa-minus-circle"></i></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+{% endblock %}

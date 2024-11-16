@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}Review{% endblock %}
+{% block content %}
+    <div class="card">
+    <div class="col-6 card h-100" style="background-color:aliceblue;border: 1px solid blue;">
+        <div class="card-body">
+            <h6 class="card-title">
+                <i style="margin-right:5px;" class="fa fa-user"></i>{{ employee.name }}, {{ employee.title }}
+            </h6>
+            <hr/>
+            <form method="POST" name="form">
+                <table class="table" style="width: 100%">
+                    <tr>
+                        <td><label for="review_date" class="control-label text-primary">Review Date</label></td>
+                        <td><input class="col-4" type="date" id="review_date" name="review_date" required></td>
+                    </tr>
+                    <tr>
+                        <td><label for="rating" class="control-label text-primary">Rating</label></td>
+
+                        <td><i style="color:gray;" class="fa fa-lg fa-frown-open"></i>
+                        <input id="rating" name="rating" style="width: 80%" class="form-range" type="range" min="0" max="10"
+                               value="0">
+                        <i style="color:green;" class="fa fa-smile fa-lg"></i></td>
+                    </tr>
+
+                    <tr>
+                        <td><label for="comment" class="control-label text-primary">Comments</label>
+                       <td> <input name="comment" id="comment" class="comment col-3"></td>
+
+                    </tr>
+                </table>
+                <div class="container-fluid button-container">
+                    <div style="float:left;margin-top:3px;" class="text-center">
+                        <button type="submit"
+                                title="Save {{ employee.name }}"
+                                class="btn btn-sm btn-outline-primary card_button">
+                            <i class="fa fa-save"></i></button>
+                        <button onclick="cancel()"
+                                title="Cancel"
+                                class="btn btn-sm btn-outline-warning card_button">
+                            <i class="fa fa-minus-circle"></i></button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+    </div>
+{% endblock %}

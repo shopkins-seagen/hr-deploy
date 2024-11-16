@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+{% block content %}
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <div class="col-6 card h-100" style="background-color:aliceblue;border: 1px solid blue;">
+        <div class="card-body">
+            <h6 class="card-title">
+                <i style="margin-right:5px;" class="fa fa-user"></i>{{ employee.name }}, {{ employee.title }}
+            </h6>
+            <hr/>
+            <form method="POST">
+                <div class="card-text small">
+                    <table style="width: 100%;">
+                        <tr>
+                            <th>Employee ID</th>
+                            <td><input id="id" type="text" disabled="disabled" name="id" class="form-control"
+                                       value="{{ employee.id }}"></td>
+                        </tr>
+                        <tr>
+                            <th>Name</th>
+                            <td><input id="name" type="text" name="name" class="form-control"
+                                       value="{{ employee.name }}"></td>
+                        </tr>
+                        <tr>
+                            <th>Title</th>
+                            <td><input id="title" type="text" name="title" class="form-control"
+                                       value="{{ employee.title }}"></td>
+                        </tr>
+                        <tr>
+                            <th>Address</th>
+                            <td><input type="text" id="address" name="address" class="form-control"
+                                       value="{{ employee.address }}"></td>
+                        </tr>
+                        <tr>
+                            <th>SSN</th>
+                            <td><input id="ssn" type="text" name="ssn" class="form-control"
+                                       value="{{ employee.ssn }}"></td>
+                        </tr>
+                        <tr>
+                            <th>DOB</th>
+                            <td><input type="date" id="dob" name="dob" value="{{ employee.dob }}"
+                                       class="form-control"></td>
+                        </tr>
+                        <tr>
+                            <th>Started</th>
+                            <td><input type="date" id="started" name="started"
+                                       value="{{ employee.started }}" class="form-control"
+                                       required></td>
+                        </tr>
+                        <tr>
+                            <th>Terminated</th>
+                            <td><input type="date" id="ended" name="ended"
+                                       value="{{ employee.ended }}" class="form-control"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="container-fluid button-container">
+                    <div style="float:left;margin-top:3px;" class="text-center">
+                        <button type="submit"
+                                title="Save {{ employee.name }}"
+                                class="btn btn-sm btn-outline-primary card_button">
+                            <i class="fa fa-save"></i></button>
+                        <button onclick="cancel()"
+                                title="Cancel"
+                                class="btn btn-sm btn-outline-warning card_button">
+                            <i class="fa fa-minus-circle"></i></button>
+                    </div>
+                </div>
+
+
+                <div>
+                    <hr/>
+                    <div class="container-fluid">
+                        <h5 style="float:left;">Review History</h5>
+                        <a class="btn btn-sm btn-outline-primary"
+                           style="float:right; margin:5px;"
+                           href="{{ url_for('review',id=employee.id)}}"><i class="fa fa-plus-circle" style="margin-right: 4px;"></i>Review</a>
+
+                    </div>
+                    <table class="border table table-striped" style="width:100%;">
+                        <tr>
+                            <th style="width: 25%;">Review Date</th>
+                            <th style="width: 25%;">Rating</th>
+                            <th style="width: 50%;">Comment</th>
+                        </tr>
+                        <tbody>
+                        {% for r in reviews %}
+                            <tr>
+                                <td>{{ r.review_date }}</td>
+                                <td>{{ r.rating }}</td>
+                                <td>{{ r.comment }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+{% endblock %}

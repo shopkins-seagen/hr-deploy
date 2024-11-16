@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+{% block title %}Upload Employees{% endblock %}
+{% block content %}
+    <h6>Select report to generate</h6>
+    <hr />
+    <form  method="POST">
+        <div role="radio" style="margin-left: 10px;">
+            <input type="radio" name="options" id="1" value="1">
+            <label for="1">All employees</label><br/>
+            <input type="radio" name="options" id="2" value="2">
+            <label for="2">Terminated employees</label><br/>
+            <input type="radio" name="options" id="3" value="3">
+            <label for="3">Employees due for annual review</label>
+        </div>
+        <hr />
+        <button class="btn btn-sm btn-outline-primary" type="submit">Generate Report</button>
+    </form>
+
+{% endblock %}

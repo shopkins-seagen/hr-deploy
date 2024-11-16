@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% block title %}Employees{% endblock %}
+{% block content %}
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <h4>Employees</h4>
+    <div class="row">
+        {% for e in employees %}
+            <div class="col-sm-3">
+                <div class="card" style="background-color:aliceblue;">
+                    <div class="card-body">
+                        <h6 class="card-title glyphicon-indent-right">
+
+                            <i class="fa {{ 'fa-user' if not e.ended else 'fa-user-slash' }}"
+                               style="margin-right:5px; {{ 'color:green;' if not e.ended else 'color:red;' }}"></i><span style="color: {{ 'black' if not e.ended else 'gray' }};">{{ e.name }}</span>
+                        </h6>
+                        <hr/>
+                        <div class="card-text small">
+                            <table>
+                                <tr>
+                                    <th>Title</th>
+                                    <td>{{ e.title }}</td>
+                                </tr>
+                                <tr>
+                                <tr>
+                                    <th>Started</th>
+                                    <td>{{ e.started }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Terminated</th>
+                                    <td>{{ e.ended if e.ended }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Last Review</th>
+                                    <td>{{ e.last_review if e.last_review }}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="container-fluid button-container">
+                        <form style="float:left;margin-top:3px;" class="text-center" method="POST">
+                            <button name="edit" value="{{ e.id }}" title="Edit {{ e.name }}"
+                                    style="margin-right: 5px;"
+                                    class="btn btn-sm btn-outline-primary card_button" type="submit">
+                                <i class="fa fa-edit"></i></button>
+                        </form>
+
+                        <div style="float:left;margin-top:3px;" class="text-center">
+
+                            <button onclick="review({{ e.id }},'{{ e.name }}')"
+                                    value="{{ e.id }}"
+                                    style="margin-right: 5px;"
+                                    title="Perform annual review for {{ e.name }}"
+                                    class="btn btn-sm btn-outline-success card_button">
+                                <i class="far fa-comment-alt"></i></button>
+                        </div>
+                        <div style="float:left;margin-top:3px;" class="text-center">
+
+                            <button onclick="test({{ e.id }},'{{ e.name }}')"
+                                    value="{{ e.id }}"
+                                    title="Delete {{ e.name }}"
+                                    class="btn btn-sm btn-outline-danger card_button">
+                                <i class="fa fa-user-minus"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        <div class="text-center" style="background-color: aliceblue;margin-top:6px;">
+             <a class="btn btn-sm btn-outline-primary "
+                   href="{{ url_for('index',page=1) }}">
+                    <i class="fa fa-fast-backward" style="padding-right: 3px;"></i></a>
+            {% if page>1 %}
+                <a class="btn btn-sm btn-outline-primary"
+                   href="{{ url_for('index',page=page - 1) }}">
+                    <i class="fa fa-step-backward" style="padding-right: 3px;"></i></a>
+            {% endif %}
+            <span class="text-primary">{{ page }} of {{ pages }}</span>
+            {% if page < pages %}
+                <a class="btn btn-sm btn-outline-primary"
+                   href="{{ url_for('index',page=page + 1) }}"><i class="fa fa-step-forward"
+                                                                       style="padding-left: 3px;"></i></a>
+            {% endif %}
+                     <a class="btn btn-sm btn-outline-primary "
+                   href="{{ url_for('index',page=pages) }}">
+                    <i class="fa fa-fast-forward" style="padding-right: 3px;"></i></a>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+{#style="padding-bottom: 3px;padding-top:3px;border-top:1px solid lightgrey;"#}

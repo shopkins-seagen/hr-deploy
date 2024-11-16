@@ -1,0 +1,24 @@
+.menubtn{
+    width: 200px;
+    margin-bottom: 3px;
+}
+.inputbox{
+    width: 300px;
+}
+.comment{
+    width: 600px;
+}
+.formrow{
+    margin-bottom: 2px;
+}
+.card_button{
+    width: 50px;
+}
+.button-container{
+    border-top:1px solid lightgray;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom:3px;
+}
+
