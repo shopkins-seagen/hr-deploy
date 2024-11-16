@@ -2,6 +2,8 @@ import json
 from datetime import date, datetime
 import bson
 from flask import Flask, redirect, url_for, render_template, session, request, jsonify, flash, send_from_directory
+
+from init_db import make_db
 from models import Employee, get_employees, add_employee, get_employee, delete_employee, update_employee, upload_employees,generate_report, review_employee, get_reviews
 from flask_restful import Api,Resource
 from werkzeug.utils import secure_filename
@@ -25,6 +27,7 @@ def index():
         value = int(request.form['edit'])
         return redirect(url_for('edit', id=value))
 
+    make_db()
     employees = get_employees()
 
     page = request.args.get('page', 1, type=int)
