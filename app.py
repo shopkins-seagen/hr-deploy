@@ -100,17 +100,18 @@ def add():
 @app.route('/upload', methods=['GET', 'POST'])
 def upload():
     if request.method == 'POST':
+
         if 'file' not in request.files:
             flash("No file part")
             return redirect(request.url)
+
         file = request.files['file']
         filename = secure_filename(file.filename)
         fn = os.path.join(app.config['UPLOADS'], filename)
         file.save(fn)
-        upload_employees(fn)
+        response = upload_employees(fn)
         return redirect('/')
     return render_template('upload.html')
-
 
 @app.route("/reports", methods=['GET', 'POST'])
 def report():

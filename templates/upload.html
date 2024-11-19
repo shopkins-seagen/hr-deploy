@@ -24,18 +24,20 @@
 
             <li>Do Not include ID in the CSV file</li>
             <li>Values for Date type fields must be provided in the format:
-                <i>YYYY-MM-DD</i>. <em style="font-style: normal;color:blue;">Example: 2024-11-01</em>
+                <i>YYYY-MM-DD</i>. <a download href="{{ url_for('static',filename='example.csv') }}">Download example
+                    file for upload</a>
             </li>
         </ul>
         <hr/>
-        <form method="POST">
+        <form method="POST" enctype="multipart/form-data">
             <div class="form-group">
-                <h5>Load Data</h5>
-                <input style="width:600px;background-color: aliceblue;" class="form-floating " type=file name=file>
-                <label type="submit" class="btn  btn-outline-primary">Upload</label>
+                <h6>Load Data</h6>
+                <input style="width:600px;background-color: aliceblue;" class="form-floating " type="file" name="file" id="file">
+                <input type="submit" class="btn  btn-outline-primary" value="Upload">
             </div>
         </form>
         <hr/>
+
         <h6>Schema for HR Database</h6>
         <figure style="margin:30px">
             <img src="{{ url_for('static',filename='schema.png' ) }}" alt="schema">

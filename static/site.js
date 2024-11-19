@@ -1,5 +1,5 @@
 
-function test(id,name) {
+function delete_employee(id, name) {
     if(confirm('Are you sure you want to delete ' + name + '?') == true) {
       window.location.href = '/delete/' + id;
     }
