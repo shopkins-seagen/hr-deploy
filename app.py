@@ -17,8 +17,6 @@ app = Flask(__name__,
 
 app.config['SECRET_KEY'] = 'key'
 app.config['UPLOADS'] = 'static/uploads'
-
-
 api=Api(app)
 
 @app.route('/', methods=['GET', 'POST'])
@@ -49,8 +47,7 @@ def edit(id):
               'dob':  request.form["dob"]  ,
               'title': request.form["title"],
               'started': request.form["started"],
-              'ended': request.form["ended"]}
-
+              'ended': None if not request.form["ended"] else request.form["ended"]}
 
         response = update_employee(emp)
         if response[0]:

@@ -1,17 +1,20 @@
 import os
 
 from dominate.svg import desc
-from peewee import Model, CharField, IntegerField, ForeignKeyField, DateField, JOIN,fn
+from peewee import Model, CharField, IntegerField, ForeignKeyField, DateField, JOIN, fn, AutoField
 from playhouse.db_url import connect
 import csv
 from datetime import datetime
 import json
 
+db = connect('postgres://uba6vleq35pda8:p2b429f679b386e43fc97b5fb94daec596dd65a0215d5942ebd6595175d8600fa@c97r84s7psuajm.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com:5432/d55rb2leakll3c')
 
 
-db = connect(os.environ.get('DATABASE_URL', 'sqlite:///hr.db'))
+# db = connect(os.environ.get('DATABASE_URL', 'sqlite:///hr.db'))
+
 class Employee(Model):
-    id = IntegerField(primary_key=True)
+    # id = IntegerField(primary_key=True)
+    id=AutoField(primary_key=True)
     name = CharField()
     address=CharField(null=True)
     ssn=CharField(null=True)
@@ -24,7 +27,8 @@ class Employee(Model):
         database = db
         db_table = 'Employee'
 class Review(Model):
-    id = IntegerField(primary_key=True)
+    # id = IntegerField(primary_key=True)
+    id = AutoField(primary_key=True)
     rating = IntegerField()
     review_date = DateField()
     comment=CharField()
@@ -98,7 +102,7 @@ def  upload_employees(fn):
         next(reader,None)
         with db.atomic():
             for row in reader:
-                Employee.create(name=row[0],address=row[1],ssn=row[2],dob=row[3],title=row[4],started=row[5],ended=row[6])
+                Employee.create(name=row[0],address=row[1],ssn=row[2],dob=row[3],title=row[4],started=row[5])
 
 def generate_report(typ,fn):
     data = []
