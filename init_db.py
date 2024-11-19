@@ -33,5 +33,4 @@ def layoff():
 
 
 
-make_db()
-layoff()
+
