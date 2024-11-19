@@ -11,27 +11,34 @@
     <div class="container-fluid">
         <h5>Upload external file</h5>
         <ul>
-            <li>The CSV file to upload employees must have a header row with the columns in the same sequence as displayed in the <em>Employee</em> entity</li>
-            <li>Do Not include ID in the CSV file</li>
-            <li>Values for Date type fields must be provided in the format: <i>YYYY-MM-DD</i>. Example: 2024-11-01</li>
-        </ul>
+            <li>The CSV file to upload employees must have a header row with the columns
+                <ul>
+                    <li>name</li>
+                    <li>address</li>
+                    <li>ssn</li>
+                    <li>dob</li>
+                    <li>title</li>
+                    <li>started</li>
+                </ul>
+            </li>
 
+            <li>Do Not include ID in the CSV file</li>
+            <li>Values for Date type fields must be provided in the format:
+                <i>YYYY-MM-DD</i>. <em style="font-style: normal;color:blue;">Example: 2024-11-01</em>
+            </li>
+        </ul>
+        <hr/>
         <form method="POST">
             <div class="form-group">
-                <h6>Load Data</h6>
+                <h5>Load Data</h5>
                 <input style="width:600px;background-color: aliceblue;" class="form-floating " type=file name=file>
-                <label  type="submit" class="btn  btn-outline-primary">Upload</label>
+                <label type="submit" class="btn  btn-outline-primary">Upload</label>
             </div>
         </form>
-
+        <hr/>
+        <h6>Schema for HR Database</h6>
         <figure style="margin:30px">
             <img src="{{ url_for('static',filename='schema.png' ) }}" alt="schema">
-            <figcaption style="margin-top:3px"><i>Schema for Employee Table</i></figcaption>
         </figure>
-
-
     </div>
 {% endblock %}
-
-name,address,ssn,dob,title,started,ended
-Herold,59211 Hanson Place,468-01-9921,1999-06-27,Nuclear Power Engineer,2020-04-09,2020-08-16
